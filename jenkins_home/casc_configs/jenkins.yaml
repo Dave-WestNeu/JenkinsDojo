@@ -1,0 +1,38 @@
+jenkins:
+  systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "admin"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  tools:
+    jdk:
+      installations:
+        - name: "JDK8"
+          home: "/usr/lib/jvm/java-8-openjdk-amd64"
+  nodes:
+    - permanent:
+        name: "built-in"
+        numExecutors: 2
+        remoteFS: "/var/jenkins_home"
+        labelString: "master"
+        mode: NORMAL
+        retentionStrategy: "always"
+        launcher:
+          jnlp:
+            workDirSettings:
+              disabled: false
+              internalDir: "remoting"
+              failIfWorkDirIsMissing: false
+  scm:
+    git:
+      installations:
+        - name: "Default"
+          home: "/usr/bin/git"
+  unclassified:
+    location:
+      url: "http://localhost:8080/"
